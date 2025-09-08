@@ -6,15 +6,21 @@ public class Multiples {
     }
 
     static int multiples(int n, int a, int b) {
-        int num = 0;
-        for (int i = 1; i < n; i++) {
-            if (i % a == 0 || i % b == 0) {
-                num++;
-            }
-        }
-        return num;
-    }
+        int countA = (n - 1) / a;
+        int countB = (n - 1) / b;
 
+        int x = a, y = b;
+        while (y != 0) {
+            int temp = y;
+            y = x % y;
+            x = temp;
+        }
+        int gcd = x;
+        int lcm = a / gcd * b;
+        int countBoth = (n - 1) / lcm;
+
+        return countA + countB - countBoth;
+    }
     static int multiples() {
         int num = 0;
         for (int i = 1; i < 1000; i++) {
